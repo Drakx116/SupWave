@@ -22,7 +22,7 @@ namespace SupWave.Controllers
         // GET: Playlist
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Playlists.ToListAsync());
+            return View(await _context.Playlist.ToListAsync());
         }
 
         // GET: Playlist/Details/5
@@ -33,7 +33,7 @@ namespace SupWave.Controllers
                 return NotFound();
             }
 
-            var playlist = await _context.Playlists
+            var playlist = await _context.Playlist
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (playlist == null)
             {
@@ -73,7 +73,7 @@ namespace SupWave.Controllers
                 return NotFound();
             }
 
-            var playlist = await _context.Playlists.FindAsync(id);
+            var playlist = await _context.Playlist.FindAsync(id);
             if (playlist == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace SupWave.Controllers
                 return NotFound();
             }
 
-            var playlist = await _context.Playlists
+            var playlist = await _context.Playlist
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (playlist == null)
             {
@@ -139,15 +139,15 @@ namespace SupWave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var playlist = await _context.Playlists.FindAsync(id);
-            _context.Playlists.Remove(playlist);
+            var playlist = await _context.Playlist.FindAsync(id);
+            _context.Playlist.Remove(playlist);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PlaylistExists(int id)
         {
-            return _context.Playlists.Any(e => e.Id == id);
+            return _context.Playlist.Any(e => e.Id == id);
         }
     }
 }

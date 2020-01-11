@@ -21,9 +21,9 @@ namespace SupWave.Data
         {
         }
 
-        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Playlist> Playlist { get; set; }
 
-        public DbSet<Song> Songs { get; set; }
+        public DbSet<Song> Song { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
