@@ -5,6 +5,50 @@
 <div class="container">
     <h2> SupWave - My Music Controller ♫ </h2><br />
 
+    <div class="text-center">
+        <div id="player"></div>
+
+        <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
+        <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
+    </div>
+
     <a asp-controller="Playlist" action="UserList"> My Playlists </a><br />
     <a asp-controller="Song" action="UserList"> My Songs  </a>
 </div>
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="https://kit.fontawesome.com/a3fd4570e9.js" crossorigin="anonymous"></script>
+
+<script>    
+    var wavesurfer = new WaveSurfer.create({
+        container: '#player',
+        barWidth: 3,
+        waveColor: '#eee',
+        progressColor: '#2980B9',
+        barWidth: 8,
+        barRadius: true,
+        height: 196
+    });
+
+    var isPlaying = false;
+    function play() {
+        isPlaying = !isPlaying;
+
+        var buttonClass = (isPlaying) ? "fas fa-pause" : "fas fa-play";
+        document.getElementById('togglePlay').className = buttonClass;
+
+        wavesurfer.playPause();
+    }
+    
+    var isMuted = false;
+    function toggleMute() {
+        isMuted = !isMuted;
+
+        var buttonClass = (isMuted) ? "fas fa-volume-mute" : "fas fa-volume-up";
+        document.getElementById('toggleMute').className = buttonClass;
+
+        wavesurfer.setMute(isMuted);
+    }
+
+    wavesurfer.load("/audio/primitif.mp3");
+</script>
