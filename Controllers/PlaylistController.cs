@@ -63,6 +63,8 @@ namespace SupWave.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            playlist.UserName = User.Identity.Name;
+
             if (ModelState.IsValid)
             {
                 _context.Add(playlist);

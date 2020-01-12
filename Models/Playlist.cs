@@ -11,6 +11,8 @@ namespace SupWave.Models
 
         public string Name { get; set; }
 
+        public string UserName { get; set; }
+
         public List<Song> Songs { get; set; }
     }
 }
