@@ -13,6 +13,6 @@ namespace SupWave.Models
 
         public string UserName { get; set; }
 
-        public List<Song> Songs { get; set; }
+        public virtual ICollection<Song> Songs { get; set; }
     }
 }

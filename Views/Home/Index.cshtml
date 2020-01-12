@@ -2,19 +2,29 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container">
-    <h2> SupWave - My Music Controller ♫ </h2><br />
+    <div class="container">
+        <h2> SupWave - My Music Controller ♫ </h2><br />
 
-    <div class="text-center">
-        <div id="player"></div>
+        <p id="song-name"><i> Default Song : </i> Bangarang - Skrillex </p>
 
-        <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
-        <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
+        <div class="text-center">
+            <div id="player"></div>
+
+            <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
+            <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
+        </div>
+
+        <select id="music-select">
+            @foreach (var filename in ViewBag.musics)
+            {
+                <option value="@filename">@filename</option>
+            }
+        </select>
+        <div onclick="loadMusic()"> <i id="toggleMusic" class="fas fa-sync-alt"> </i> </div>
+
+        <a asp-controller="Playlist" action="UserList"> My Playlists </a><br />
+        <a asp-controller="Song" action="UserList"> My Songs  </a>
     </div>
-
-    <a asp-controller="Playlist" action="UserList"> My Playlists </a><br />
-    <a asp-controller="Song" action="UserList"> My Songs  </a>
-</div>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
 <script src="https://kit.fontawesome.com/a3fd4570e9.js" crossorigin="anonymous"></script>
@@ -50,5 +60,27 @@
         wavesurfer.setMute(isMuted);
     }
 
-    wavesurfer.load("/audio/primitif.mp3");
+    var loadedMusic = "";
+    function loadMusic() {
+        var select = document.getElementById('music-select');
+        var newSong = select.options[select.selectedIndex].text;
+
+        wavesurfer.load("/audio/" + newSong);
+
+        wavesurfer.on('ready', function () {
+            console.log("Now playing " + newSong);
+            document.getElementById('song-name').innerHTML = "<i> Playing : </i>" + newSong;
+
+            if (isPlaying) {
+                wavesurfer.play();
+            }
+        }
+    )}
+
+    // Loads a song by default
+    if (!loadedMusic) {
+        loadedMusic = "/audio/default.mp3";
+    }
+
+    wavesurfer.load(loadedMusic);
 </script>

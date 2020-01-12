@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,23 @@ namespace SupWave.Controllers
 
         public IActionResult Index()
         {
+            string audioDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/audio");
+
+            List<string> musicNames = new List<string>();
+            List<string> musicPaths = new List<string>();
+            foreach (string filepath in Directory.GetFiles(audioDirectory))
+            {
+                string filename = Path.GetFileName(filepath);
+                if(filename != ".gitignore")
+                {
+                    musicNames.Add(filename); 
+                    musicPaths.Add(filepath);
+                }
+            }
+
+            ViewBag.musics = musicNames;
+            ViewBag.paths = musicPaths;
+
             return View();
         }
 
