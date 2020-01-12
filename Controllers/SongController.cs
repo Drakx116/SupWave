@@ -55,10 +55,10 @@ namespace SupWave.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string name, IFormFile media)
+        public async Task<IActionResult> Create(string name, string singer,  IFormFile media)
         {
             // Checks if parameters are set
-            if (name == null || media == null)
+            if (name == null || singer == null || media == null)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -79,6 +79,7 @@ namespace SupWave.Controllers
             Song newSong = new Song
             {
                 Name = name,
+                Singer = singer,
                 Media = media.FileName
             };
 

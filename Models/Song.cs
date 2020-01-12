@@ -11,6 +11,8 @@ namespace SupWave.Models
 
         public string Name { get; set; }
 
+        public string Singer { get; set; }
+
         public string Media { get; set; }
     }
 }
