@@ -3,27 +3,29 @@
 }
 
     <div class="container">
-        <h2> SupWave - My Music Controller ♫ </h2><br />
+        <h1> SupWave - My Music Controller ♫ </h1><br />
 
         <p id="song-name"><i> Default Song : </i> Bangarang - Skrillex </p>
 
         <div class="text-center">
             <div id="player"></div>
+        </div>
 
+        <div class="control-buttons">
             <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
             <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
         </div>
 
-        <select id="music-select">
-            @foreach (var filename in ViewBag.musics)
-            {
-                <option value="@filename">@filename</option>
-            }
-        </select>
-        <div onclick="loadMusic()"> <i id="toggleMusic" class="fas fa-sync-alt"> </i> </div>
-
-        <a asp-controller="Playlist" action="UserList"> My Playlists </a><br />
-        <a asp-controller="Song" action="UserList"> My Songs  </a>
+        <div class="load-music-form">
+            <span class="songs-label"> Songs : </span>
+            <select id="music-select">
+                @foreach (var filename in ViewBag.musics)
+                {
+                    <option value="@filename">@filename</option>
+                }
+            </select>
+            <div onclick="loadMusic()"> <i id="toggleMusic" class="fas fa-sync-alt"> </i> </div>
+        </div>
     </div>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>

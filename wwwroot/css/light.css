@@ -1,10 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    color: #2980b9 !important;
 }
 
 /* Provide sufficient contrast against white background */
@@ -69,3 +71,54 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Custom
+------------------------------------------------- */
+
+header {
+    font-family: 'Muli', Arial, sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Oswald', Arial, sans-serif;
+}
+
+#song-name {
+    font-family: 'Nunito Sans', Arial, sans-serif;
+    font-size: 20px;
+}
+
+#music-select {
+    margin-top: 1em;
+    font-family: 'Muli', Arial, sans-serif;
+}
+
+.control-buttons {
+    margin-top: 1em
+}
+
+.control-buttons > div {
+    display: inline-block;
+    font-size: 1.5em;
+    color: #2980b9;
+}
+
+.control-buttons > div:last-child {
+    margin-left: 0.5em;
+}
+
+.load-music-form > * {
+    display: inline-block;
+    margin-top: 0.5em;
+}
+
+.load-music-form > div {
+    font-size: 1.2em;
+    margin-left: 0.5em;
+    color: #2980b9 !important;
+}
+
+.songs-label {
+    font-family: 'Muli', Arial, sans-serif;
+}
+
