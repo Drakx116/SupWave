@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SupWave.Data;
 
 namespace SupWave.Migrations
 {
     [DbContext(typeof(SupWaveContext))]
-    partial class SupWaveContextModelSnapshot : ModelSnapshot
+    [Migration("20200111235130_AddUniqueNameOnPlaylistSchema")]
+    partial class AddUniqueNameOnPlaylistSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

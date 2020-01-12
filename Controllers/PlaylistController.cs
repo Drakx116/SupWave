@@ -56,6 +56,13 @@ namespace SupWave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Playlist playlist)
         {
+            // Checks unique playlist name
+            var existingPlaylistName = await _context.Playlist.FirstOrDefaultAsync(p => p.Name == playlist.Name);
+            if (existingPlaylistName != null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(playlist);
