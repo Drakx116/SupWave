@@ -83,7 +83,11 @@ h1, h2, h3, h4 {
     font-family: 'Oswald', Arial, sans-serif;
 }
 
-#song-name {
+#main-title {
+    margin: 0.5em 0 0.5em 0;
+}
+
+.common-paragraph {
     font-family: 'Nunito Sans', Arial, sans-serif;
     font-size: 20px;
 }
@@ -120,5 +124,10 @@ h1, h2, h3, h4 {
 
 .songs-label {
     font-family: 'Muli', Arial, sans-serif;
+}
+
+.list-link {
+    list-style: square inside;
+    font-size: 20px;
 }
 

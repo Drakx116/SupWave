@@ -5,7 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Playlist : @Model.Name </h1>
+<h1>Playlist @Model.Id </h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="@Model.Name" class="control-label"> Name :</label>
+                <input asp-for="@Model.Name" class="form-control" disabled />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
 <hr />
 
 <div class="list-actions">

@@ -20,16 +20,20 @@
                 <input asp-for="Singer" class="form-control" />
 
                 <label asp-for="Media" class="control-label"></label>
-                <input type="file" asp-for="Media" class="form-control" />
+                <input type="file" class="btn btn-dark" asp-for="Media">
 
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
+            <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
+<hr />
 
 <div>
     <a asp-action="Index">Back to List</a>

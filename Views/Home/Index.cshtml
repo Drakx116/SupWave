@@ -3,35 +3,45 @@
 }
 
     <div class="container">
-        <h1> SupWave - My Music Controller ♫ </h1><br />
+        <h1 id="main-title"> SupWave - My Music Controller ♫ </h1>
 
-        <p id="song-name"><i> Default Song : </i> Bangarang - Skrillex </p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p id="song-name" class="common-paragraph" ><i> Default Song : </i> Bangarang - Skrillex </p>
 
-        <div class="text-center">
-            <div id="player"></div>
-        </div>
+            <div class="text-center">
+                <div id="player"></div>
+            </div>
 
-        <div class="control-buttons">
-            <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
-            <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
-        </div>
+            <div class="control-buttons">
+                <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
+                <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
+            </div>
 
-        <div class="load-music-form">
-            <span class="songs-label"> Songs : </span>
-            <select id="music-select">
-                @foreach (var filename in ViewBag.musics)
-                {
-                    <option value="@filename">@filename</option>
-                }
-            </select>
-            <div onclick="loadMusic()"> <i id="toggleMusic" class="fas fa-sync-alt"> </i> </div>
-        </div>
+            <div class="load-music-form">
+                <span class="songs-label"> Songs : </span>
+                <select id="music-select">
+                    @foreach (var filename in ViewBag.musics)
+                    {
+                        <option value="@filename">@filename</option>
+                    }
+                </select>
+                <div onclick="loadMusic()"> <i id="toggleMusic" class="fas fa-sync-alt"> </i> </div>
+            </div>
+        }
+        else
+        {
+            <p> 
+                You have to be authenticated to access the music controller ! 
+                <a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register"> Register </a>
+            </p>
+        }
     </div>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
 <script src="https://kit.fontawesome.com/a3fd4570e9.js" crossorigin="anonymous"></script>
 
-<script>    
+<script>
     var wavesurfer = new WaveSurfer.create({
         container: '#player',
         barWidth: 3,
@@ -51,7 +61,7 @@
 
         wavesurfer.playPause();
     }
-    
+
     var isMuted = false;
     function toggleMute() {
         isMuted = !isMuted;
@@ -77,7 +87,8 @@
                 wavesurfer.play();
             }
         }
-    )}
+        )
+    }
 
     // Loads a song by default
     if (!loadedMusic) {
