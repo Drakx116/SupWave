@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -54,15 +55,49 @@ namespace SupWave.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Song song)
+        public async Task<IActionResult> Create(string name, IFormFile media)
         {
-            if (ModelState.IsValid)
+            // Checks if parameters are set
+            if (name == null || media == null)
             {
-                _context.Add(song);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(song);
+
+            // Checks file extension
+            var extension = Path.GetExtension(media.FileName);
+            string[] validExtensions = new string[] { "mp3", "wav" };
+
+            foreach (string validExtension in validExtensions)
+            {
+                if (validExtension.Equals(extension))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            // Finally creates the song if there is no error
+            Song newSong = new Song
+            {
+                Name = name,
+                Media = media.FileName
+            };
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(newSong);
+                await _context.SaveChangesAsync();
+
+                // Stores the given file using FileStream
+                string audioDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/audio", media.FileName);
+                using (var mediaStream = new FileStream(audioDirectory, FileMode.Create))
+                {
+                    media.CopyTo(mediaStream);
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
         }
 
         // GET: Song/Edit/5
