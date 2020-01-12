@@ -5,16 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Playlist @Model.Name </h1>
+<h1>Playlist : @Model.Name </h1>
+<hr />
 
-<div>
-    <div class="list-link">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-</div>
-
-<br />
-<div>
+<div class="list-actions">
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Delete" asp-route-id="@Model.Id">Delete </a>|
     <a asp-action="Index">Back to List</a>

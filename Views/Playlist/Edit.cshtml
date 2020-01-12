@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Playlist</h4>
+<h1>Edit : @Model.Name </h1>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -26,6 +25,7 @@
     </div>
 </div>
 
+<hr />
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
