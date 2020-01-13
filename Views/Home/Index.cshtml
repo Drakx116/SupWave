@@ -18,17 +18,17 @@
                 <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
                 <div onclick="musicPrev()"><i class="fas fa-arrow-left"></i></div>
                 <div onclick="musicNext()"><i class="fas fa-arrow-right"></i></div>
+                <div onclick="musicRandom()"><i class="fas fa-random"></i></div>
             </div>
 
             <div class="load-music-form">
                 <span class="songs-label"> Songs : </span>
-                <select id="music-select">
+                <select id="music-select" onchange="loadMusic()">
                     @foreach (var filename in ViewBag.musics)
                     {
                         <option value="@filename">@filename</option>
                     }
                 </select>
-                <div onclick="loadMusic()"> <i id="toggleMusic" class="fas fa-sync-alt"> </i> </div>
             </div>
         }
         else
@@ -43,95 +43,4 @@
 <script src="https://unpkg.com/wavesurfer.js"></script>
 <script src="https://kit.fontawesome.com/a3fd4570e9.js" crossorigin="anonymous"></script>
 
-<script>
-    var wavesurfer = new WaveSurfer.create({
-        container: '#player',
-        barWidth: 3,
-        waveColor: '#eee',
-        progressColor: '#2980B9',
-        barWidth: 8,
-        barRadius: true,
-        height: 196
-    });
-
-    var isPlaying = false;
-    function play() {
-        isPlaying = !isPlaying;
-
-        var buttonClass = (isPlaying) ? "fas fa-pause" : "fas fa-play";
-        document.getElementById('togglePlay').className = buttonClass;
-
-        wavesurfer.playPause();
-    }
-
-    var isMuted = false;
-    function toggleMute() {
-        isMuted = !isMuted;
-
-        var buttonClass = (isMuted) ? "fas fa-volume-mute" : "fas fa-volume-up";
-        document.getElementById('toggleMute').className = buttonClass;
-
-        wavesurfer.setMute(isMuted);
-    }
-
-    var loadedMusic = "";
-    function loadMusic() {
-        var select = document.getElementById('music-select');
-        var newSong = select.options[select.selectedIndex].text;
-
-        wavesurfer.load("/audio/" + newSong);
-
-        wavesurfer.on('ready', function () {
-            console.log("Now playing " + newSong);
-            document.getElementById('song-name').innerHTML = "<i> Playing : </i>" + newSong;
-
-            if (isPlaying) {
-                wavesurfer.play();
-            }
-        }
-        )
-    }
-
-    function musicNext() {
-        var select = document.getElementById('music-select');
-
-        // Get max array position 
-        var selectLength = select.length - 1;
-
-        console.log("Length : ", selectLength);
-
-        var currentSongId = select.options.selectedIndex;
-
-        console.log("Current id : ", currentSongId);
-
-        var nextSongId = currentSongId + 1;
-        if (nextSongId > selectLength) {
-            nextSongId = 0;
-        }
-
-        select.options[nextSongId].selected = "selected";
-    }
-
-    function musicPrev() {
-        var select = document.getElementById('music-select');
-
-        // Get max array position 
-        var selectLength = select.length - 1;
-
-        var currentSongId = select.options.selectedIndex;
-
-        var prevSongId = currentSongId - 1;
-        if (prevSongId < 0) {
-            prevSongId = selectLength;
-        }
-
-        select.options[prevSongId].selected = "selected";
-    }
-
-    // Loads a song by default
-    if (!loadedMusic) {
-        loadedMusic = "/audio/default.mp3";
-    }
-
-    wavesurfer.load(loadedMusic);
-</script>
+<script type="text/javascript" src="~/js/wavesurfer-loader.js"></script>
