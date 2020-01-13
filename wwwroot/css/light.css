@@ -75,6 +75,10 @@ body {
 /* Custom
 ------------------------------------------------- */
 
+body {
+    background-color: #fff;
+}
+
 header {
     font-family: 'Muli', Arial, sans-serif;
 }
@@ -92,13 +96,27 @@ h1, h2, h3, h4 {
     font-size: 20px;
 }
 
+#player {
+    width: 100%;
+}
+
 #music-select {
+    padding: 0.75em;
     margin-top: 1em;
     font-family: 'Muli', Arial, sans-serif;
 }
 
+#music-select > option {
+    font-family: 'Muli', Arial, sans-serif;
+}
+
+option {
+    height: 2em;
+}
+
 .control-buttons {
-    margin-top: 1em
+    margin-top: 1em;
+    text-align: center;
 }
 
 .control-buttons > div {
@@ -108,7 +126,11 @@ h1, h2, h3, h4 {
 }
 
 .control-buttons > div {
-    margin-left: 0.5em;
+    margin: 0 0.5em 0 0.5em;
+}
+
+.load-music-form {
+    margin-top: 1em;
 }
 
 .load-music-form > * {
@@ -131,3 +153,6 @@ h1, h2, h3, h4 {
     font-size: 20px;
 }
 
+footer {
+    background-color: #fff;
+}

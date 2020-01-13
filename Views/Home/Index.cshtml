@@ -15,20 +15,21 @@
 
             <div class="control-buttons">
                 <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
-                <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
+                <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-up"></i> </div>
                 <div onclick="musicPrev()"><i class="fas fa-arrow-left"></i></div>
                 <div onclick="musicNext()"><i class="fas fa-arrow-right"></i></div>
                 <div onclick="musicRandom()"><i class="fas fa-random"></i></div>
             </div>
 
             <div class="load-music-form">
-                <span class="songs-label"> Songs : </span>
+                <span class="songs-label"> Choose a song : </span>
                 <select id="music-select" onchange="loadMusic()">
                     @foreach (var filename in ViewBag.musics)
                     {
                         <option value="@filename">@filename</option>
                     }
                 </select>
+                <div class="select-arrow"></div>
             </div>
         }
         else
