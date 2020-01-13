@@ -107,7 +107,7 @@ h1, h2, h3, h4 {
     color: #2980b9;
 }
 
-.control-buttons > div:last-child {
+.control-buttons > div {
     margin-left: 0.5em;
 }
 

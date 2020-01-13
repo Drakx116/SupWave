@@ -16,6 +16,8 @@
             <div class="control-buttons">
                 <div onclick="play()"> <i id="togglePlay" class="fas fa-play"></i> </div>
                 <div onclick="toggleMute()"><i id="toggleMute" class="fas fa-volume-mute"></i> </div>
+                <div onclick="musicPrev()"><i class="fas fa-arrow-left"></i></div>
+                <div onclick="musicNext()"><i class="fas fa-arrow-right"></i></div>
             </div>
 
             <div class="load-music-form">
@@ -88,6 +90,42 @@
             }
         }
         )
+    }
+
+    function musicNext() {
+        var select = document.getElementById('music-select');
+
+        // Get max array position 
+        var selectLength = select.length - 1;
+
+        console.log("Length : ", selectLength);
+
+        var currentSongId = select.options.selectedIndex;
+
+        console.log("Current id : ", currentSongId);
+
+        var nextSongId = currentSongId + 1;
+        if (nextSongId > selectLength) {
+            nextSongId = 0;
+        }
+
+        select.options[nextSongId].selected = "selected";
+    }
+
+    function musicPrev() {
+        var select = document.getElementById('music-select');
+
+        // Get max array position 
+        var selectLength = select.length - 1;
+
+        var currentSongId = select.options.selectedIndex;
+
+        var prevSongId = currentSongId - 1;
+        if (prevSongId < 0) {
+            prevSongId = selectLength;
+        }
+
+        select.options[prevSongId].selected = "selected";
     }
 
     // Loads a song by default
